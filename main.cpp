@@ -118,6 +118,7 @@ void TestHitcount() {
   TestFunctionality(docs, queries, expected);
 }
 
+
 void TestRanking() {
   const vector<string> docs = {
     "london is the capital of great britain",
@@ -202,9 +203,9 @@ void TestBasicSearch() {
 }
 /*
 void TestSearchServer(vector<pair<istream, ostream*>> streams) {
-  // IteratorRange — шаблон из задачи Paginator
-  // random_time() — функция, которая возвращает случайный
-  // промежуток времени
+  // IteratorRange пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Paginator
+  // random_time() пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
   LOG_DURATION("Total");
   SearchServer srv(streams.front().first);
