@@ -95,11 +95,17 @@ private:
   int fail_count = 0;
 };
 
+#define UNIQUE_NAME1(x) unique_##x
+
+#define UNIQUE_NAME(x) UNIQUE_NAME1(x)
+
+#define UNIQ UNIQUE_NAME(__LINE__)
+
 #define ASSERT_EQUAL(x, y) {            \
-  ostringstream os;                     \
-  os << #x << " != " << #y << ", "      \
+  ostringstream UNIQ;                     \
+  UNIQ << #x << " != " << #y << ", "      \
     << __FILE__ << ":" << __LINE__;     \
-  AssertEqual(x, y, os.str());          \
+  AssertEqual(x, y, UNIQ.str());          \
 }
 
 #define ASSERT(x) {                     \
@@ -111,4 +117,3 @@ private:
 
 #define RUN_TEST(tr, func) \
   tr.RunTest(func, #func)
-
