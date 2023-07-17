@@ -26,7 +26,7 @@ public:
     	if(pos == text.end())
     		return;
 
-    	list<char>::iterator it;
+    	list<char>::iterator it = pos;
     	for (size_t i = 0; i < tokens && it != text.end(); ++it, ++i);
 
     	buffer.splice(buffer.end(), text, pos, it);
@@ -37,7 +37,7 @@ public:
     	if(pos == text.end())
     		return;
 
-    	list<char>::iterator it;
+    	list<char>::iterator it = pos;
     	for (size_t i = 0; i < tokens && it != text.end(); ++it, ++i);
 
     	buffer = {pos, it};
