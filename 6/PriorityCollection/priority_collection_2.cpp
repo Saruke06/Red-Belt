@@ -4,7 +4,7 @@
 #include <iterator>
 #include <memory>
 #include <set>
-#include <map>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -18,7 +18,6 @@ public:
     // Добавить объект с нулевым приоритетом
     // с помощью перемещения и вернуть его идентификатор
     Id Add(T object) {
-    	//id_element[last_id] = move(object);
     	id_element.emplace(make_pair(last_id, move(object)));
     	id_priority[last_id] = 0;
     	priority_id.insert(make_pair(0, last_id));
@@ -33,7 +32,6 @@ public:
     void Add(ObjInputIt range_begin, ObjInputIt range_end,
              IdOutputIt ids_begin) {
     	for (auto it = range_begin; it != range_end; ++it) {
-    		//id_element[last_id] = move(*it);
     		id_element.emplace(make_pair(last_id, move(*it)));
     		id_priority[last_id] = 0;
     		priority_id.insert(make_pair(0, last_id));
@@ -55,9 +53,13 @@ public:
 
     // Увеличить приоритет объекта на 1
     void Promote(Id id) {
-    	priority_id.erase({id_priority[id], id});
-    	id_priority[id]++;
+    	priority_id.erase({id_priority[id]++, id});
     	priority_id.insert({id_priority[id], id});
+
+
+//    	auto tmp = priority_id.extract({id_priority[id]++, id});
+//    	tmp.value().first++;
+//    	priority_id.insert(move(tmp));
     }
 
     // Получить объект с максимальным приоритетом и его приоритет
@@ -81,8 +83,8 @@ public:
 private:
     // Приватные поля и методы
     Id last_id = 0;
-    map<Id, T> id_element;
-    map<Id, int> id_priority;
+    unordered_map<Id, T> id_element;
+    unordered_map<Id, int> id_priority;
     set<pair<int, Id>> priority_id;
 };
 
@@ -125,6 +127,8 @@ void TestNoCopy() {
 }
 
 int main() {
+	std::ios_base::sync_with_stdio(false);
+	std::cin.tie(nullptr);
     TestRunner tr;
     RUN_TEST(tr, TestNoCopy);
     return 0;
